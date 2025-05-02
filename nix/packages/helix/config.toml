@@ -1,0 +1,25 @@
+theme = "catppuccin_frappe"
+
+[editor]
+true-color = true
+line-number = "relative"
+undercurl = true
+bufferline = "multiple"
+color-modes = true
+end-of-line-diagnostics = "error"
+insert-final-newline = false
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.inline-diagnostics]
+cursor-line = "hint"
+
+[keys.insert]
+"§" = ":toggle lsp.display-inlay-hints"
+Meta-s = ":w"
+
+[keys.normal]
+"§" = ":toggle lsp.display-inlay-hints"
+Meta-s = ":w"
