@@ -17,6 +17,7 @@
     })
     // {
       darwinConfigurations.sylex-mba = self.outputs.__configurations.aarch64-darwin.darwin;
+      nixosConfigurations.nixos = self.outputs.__configurations.x86_64-linux.desktop;
     };
 
   inputs = {
@@ -34,22 +35,13 @@
 
     # Add configuration for packages
     wrapper-manager.url = "github:viperML/wrapper-manager";
-    wrapper-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Packages
-    rio-flake.url = "github:raphamorim/rio?rev=e8d992c8ae96da7eb238541e154639a9a9b46c30";
-    rio-flake.inputs.nixpkgs.follows = "nixpkgs";
+    # asciinema-flake.url = "github:asciinema/asciinema?rev=14b374697144a68b0a6731250183ec004b2ce085";
+    # asciinema-flake.inputs.nixpkgs.follows = "nixpkgs";
 
-    helix-flake.url = "github:helix-editor/helix?rev=a05c151bb6e8e9c65ec390b0ae2afe7a5efd619b";
-    helix-flake.inputs.nixpkgs.follows = "nixpkgs";
+    # asciinema-gif-generator-flake.url = "github:asciinema/agg?rev=f043c1f54a31381b0ff3a5ca2545ec354de80909";
+    # asciinema-gif-generator-flake.inputs.nixpkgs.follows = "nixpkgs";
 
-    asciinema-flake.url = "github:asciinema/asciinema?rev=14b374697144a68b0a6731250183ec004b2ce085";
-    asciinema-flake.inputs.nixpkgs.follows = "nixpkgs";
-
-    asciinema-gif-generator-flake.url = "github:asciinema/agg?rev=f043c1f54a31381b0ff3a5ca2545ec354de80909";
-    asciinema-gif-generator-flake.inputs.nixpkgs.follows = "nixpkgs";
-
-    nix-melt-flake.url = "github:nix-community/nix-melt";
-    nix-melt-flake.inputs.nixpkgs.follows = "nixpkgs";
   };
 }

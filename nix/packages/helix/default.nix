@@ -67,7 +67,7 @@
   '';
 in
   root.lib.wrap rec {
-    basePackage = inputs.helix-flake.packages."${pkgs.system}".default;
+    basePackage = pkgs.helix;
     pathAdd = with pkgs; [
       fish-lsp
       nixd

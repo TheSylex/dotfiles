@@ -17,9 +17,5 @@ pkgs.lib
         |> (self.recursiveUpdate updates)
         |> self.serde.toTOML);
   };
-  wrap = wrapper: ((inputs.wrapper-manager.lib.build {
-      inherit pkgs;
-      modules = [{wrappers.${wrapper.basePackage.name} = wrapper;}];
-    })
-    // {name = wrapper.basePackage.name;});
+  wrap = wrapper: inputs.wrapper-manager.lib.wrapWith pkgs wrapper;
 })

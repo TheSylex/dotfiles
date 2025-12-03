@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
 }:
 (with pkgs; {
   inherit
@@ -13,7 +12,7 @@
     eza
     bat
     erdtree
-    du-dust
+    dust
     tealdeer
     which
     ouch # No bullshit compress/decompress files
@@ -39,6 +38,7 @@
     hwatch # watch TUI
     presenterm # Powerpoint CLI
     ternimal # Screensaver
+    nix-melt
     ;
 })
 // {
@@ -46,7 +46,6 @@
     if pkgs.stdenv.isDarwin
     then pkgs.darwin.sudo
     else pkgs.sudo-rs;
-  nix-melt = inputs.nix-melt-flake.packages."${pkgs.system}".default;
 }
 // (
   if pkgs.stdenv.isDarwin

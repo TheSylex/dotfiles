@@ -1,7 +1,6 @@
 {
   root,
   pkgs,
-  inputs,
 }: let
   # INFO: This is for using a custom font
   # config_toml_file =
@@ -15,7 +14,7 @@
   #   };
 in
   root.lib.wrap rec {
-    basePackage = inputs.rio-flake.packages."${pkgs.system}".default;
+    basePackage = pkgs.rio;
     env.RIO_CONFIG_HOME.value = "${placeholder "out"}/share/.config/rio";
     postBuild = ''
       install -Dm644 ${./config.toml} ${env.RIO_CONFIG_HOME.value}/config.toml
