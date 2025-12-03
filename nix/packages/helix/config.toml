@@ -6,7 +6,7 @@ line-number = "relative"
 undercurl = true
 bufferline = "multiple"
 color-modes = true
-end-of-line-diagnostics = "error"
+end-of-line-diagnostics = "hint"
 insert-final-newline = false
 
 [editor.lsp]
@@ -14,7 +14,24 @@ display-messages = true
 display-inlay-hints = true
 
 [editor.inline-diagnostics]
-cursor-line = "hint"
+cursor-line = "error"
+other-lines = "disable"
+
+# [editor]
+# end-of-line-diagnostics = "error"
+# [editor.inline-diagnostics]
+# cursor-line = "hint"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+render = true
+
+[editor.statusline]
+left = ["mode", "spinner", "version-control", "file-name"]
 
 [keys.insert]
 "§" = ":toggle lsp.display-inlay-hints"
@@ -23,3 +40,10 @@ Meta-s = ":w"
 [keys.normal]
 "§" = ":toggle lsp.display-inlay-hints"
 Meta-s = ":w"
+"'" = ":buffer-previous"
+"\\" = ":buffer-next"
+
+X = "select_line_above"
+
+[keys.select]
+X = "select_line_above"

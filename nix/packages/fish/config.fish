@@ -1,20 +1,37 @@
 set fish_greeting # Disable greeting
 
-# abbreviatons
-abbr -a ls eza
+# --abbreviatons--
+abbr -a l eza --icons=auto
+abbr -a ls eza --icons=auto
+abbr -a ll eza --grid -lhag --icons=auto --git --git-repos
+
+abbr -a t btop 2> /dev/null
 abbr -a cat bat
 abbr -a lg lazygit
 abbr -a e exit
 abbr -a o open
+# Expose SSH through pinggy (60 min timeout)
+abbr -a ssh-share ssh -p 443 -R0:localhost:22 tcp@eu.a.pinggy.io
+# Literally terminal streaming that works on browsers support for input/readonly
+abbr -a tty-share tty-share --public --listen 127.0.0.1:42069 --readonly
 
-# enable starship
-starship init fish | source
-enable_transience
+# Makes "!" be substituted by last command
+function last_history_item
+    echo $history[1]
+end
+abbr -a ! --position anywhere --function last_history_item
 
-# enable direnv
+# --aliases--
+function screensaver
+    # ternimal width=$COLUMNS height=(math $LINES x 2 - 2) length=1000 thickness=3,12,3,0,0 radius=18,36 gradient=0:#a6e3a1,0.5:#94e2d5,1:#74c7ec
+    ternimal width=$COLUMNS height=(math $LINES x 2 - 2) length=300 gradient=0:#a6e3a1,0.5:#94e2d5,1:#74c7ec
+end
+
+# Source programs into fish
 direnv hook fish | source
-
-# zoxide config
+starship init fish | source && enable_transience
+tv init fish | source # tv before atuin and zoxide in order to not override them
+atuin init fish | source
 zoxide init fish | source
 
 # yazi config
