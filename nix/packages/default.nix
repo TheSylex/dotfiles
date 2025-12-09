@@ -4,6 +4,8 @@
 (with pkgs; {
   inherit
     git
+    jujutsu
+    jjui
     less # Needed for git
     ps
     wget
@@ -27,7 +29,7 @@
     onefetch
     fastfetch
     yazi
-    gitui
+    # gitui # FIXME: Doesn't compile in unstable
     lazygit
     tdf # PDF Viewer
     uutils-coreutils-noprefix
@@ -39,26 +41,26 @@
     presenterm # Powerpoint CLI
     ternimal # Screensaver
     nix-melt
+    zk # Note taking
+    wishlist # SSH list and connect
+    alejandra
     ;
 })
-// {
-  sudo =
-    if pkgs.stdenv.isDarwin
-    then pkgs.darwin.sudo
-    else pkgs.sudo-rs;
-}
 // (
   if pkgs.stdenv.isDarwin
   then {
     # Grab miscelaneous macos utilities that aren't available in nixpkgs
+    sudo = pkgs.writeShellScriptBin "sudo" "/usr/bin/sudo $@";
     pbpaste = pkgs.writeShellScriptBin "pbpaste" "/usr/bin/pbpaste $@";
     pbcopy = pkgs.writeShellScriptBin "pbcopy" "/usr/bin/pbcopy $@";
     open = pkgs.writeShellScriptBin "open" "/usr/bin/open $@";
     osascript = pkgs.writeShellScriptBin "osascript" "/usr/bin/osascript $@";
     # Better audio panel
-    soundsource = pkgs.soundsource;
+    # soundsource = pkgs.soundsource;
   }
-  else {}
+  else {
+    sudo = pkgs.sudo-rs;
+  }
 )
 # i.asciinema-flake.packages."${system}".default #TODO: Doesn't work for some reason
 # i.asciinema-gif-generator-flake.packages."${system}".default #TODO: Doesn't work for some reason

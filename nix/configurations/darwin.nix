@@ -11,8 +11,10 @@ inputs.nix-darwin.lib.darwinSystem {
 
       programs.fish.enable = true;
       programs.fish.package = root.packages.fish;
-      users.users.aitor.shell = root.packages.fish;
+
+      system.primaryUser = "aitor";
       nix.settings.trusted-users = [ "aitor" ];
+      users.users.aitor.shell = root.packages.fish;
 
       services.openssh.enable = true;
 
@@ -28,10 +30,13 @@ inputs.nix-darwin.lib.darwinSystem {
         };
       };
 
-      environment.systemPackages = pkgs.lib.attrValues root.packages;
+      environment.systemPackages = root.packages
+      |> pkgs.lib.filterAttrs (n: _: n != "rio" ) # FIXME: Why the fuck doesn't rio work
+      |> pkgs.lib.attrValues
+      |> pkgs.lib.filter (pkg: pkg |> pkgs.lib.meta.availableOn pkgs.stdenv.hostPlatform);
 
-      system.defaults.NSGlobalDomain.KeyRepeat = 20;
-      system.defaults.NSGlobalDomain.InitialKeyRepeat = 20;
+      system.defaults.NSGlobalDomain.KeyRepeat = 1;
+      system.defaults.NSGlobalDomain.InitialKeyRepeat = 10;
 
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog

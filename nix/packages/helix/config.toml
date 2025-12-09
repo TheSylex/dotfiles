@@ -36,14 +36,16 @@ left = ["mode", "spinner", "version-control", "file-name"]
 [keys.insert]
 "§" = ":toggle lsp.display-inlay-hints"
 Meta-s = ":w"
+Meta-r = ":reload"
 
 [keys.normal]
 "§" = ":toggle lsp.display-inlay-hints"
 Meta-s = ":w"
 "'" = ":buffer-previous"
 "\\" = ":buffer-next"
-
 X = "select_line_above"
+Meta-r = ":reload"
 
 [keys.select]
 X = "select_line_above"
+Meta-r = ":reload"

@@ -34,6 +34,13 @@ tv init fish | source # tv before atuin and zoxide in order to not override them
 atuin init fish | source
 zoxide init fish | source
 
+# This allows to use nu-shell inside pipes with ease
+# EXAMPLE: tail -f server.log | nuc "from jsonl | where module == gunicorn.access"
+function nuc --description "Run Nushell code over stdin (with std/formats loaded)"
+    set -l cmd (string join " " $argv)
+    nu -n -c "use std/formats *; open --raw /dev/stdin | $cmd"
+end
+
 # yazi config
 function yazi_with_cd
 	set tmp (mktemp -t "yazi-cwd.XXXXXX")
