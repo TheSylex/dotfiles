@@ -1,6 +1,4 @@
-{
-  pkgs,
-}:
+{pkgs}:
 (with pkgs; {
   inherit
     git
@@ -47,14 +45,26 @@
     ;
 })
 // (
-  if pkgs.stdenv.isDarwin
-  then {
+  if pkgs.stdenv.hostPlatform.isDarwin
+  then let
+    macOsBin = path: name: pkgs.writeShellScriptBin name ''${path}/${name} "$@"'';
+  in {
     # Grab miscelaneous macos utilities that aren't available in nixpkgs
-    sudo = pkgs.writeShellScriptBin "sudo" "/usr/bin/sudo $@";
-    pbpaste = pkgs.writeShellScriptBin "pbpaste" "/usr/bin/pbpaste $@";
-    pbcopy = pkgs.writeShellScriptBin "pbcopy" "/usr/bin/pbcopy $@";
-    open = pkgs.writeShellScriptBin "open" "/usr/bin/open $@";
-    osascript = pkgs.writeShellScriptBin "osascript" "/usr/bin/osascript $@";
+    sudo = macOsBin "/usr/bin" "sudo";
+    pbpaste = macOsBin "/usr/bin" "pbpaste";
+    pbcopy = macOsBin "/usr/bin" "pbcopy";
+    open = macOsBin "/usr/bin" "open";
+    osascript = macOsBin "/usr/bin" "osascript";
+    security = macOsBin "/usr/bin" "security";
+    defaults = macOsBin "/usr/bin" "defaults";
+    plutil = macOsBin "/usr/bin" "plutil";
+    killall = macOsBin "/usr/bin" "killall";
+    launchctl = macOsBin "/bin" "launchctl";
+    caffeinate = macOsBin "/usr/bin" "caffeinate";
+    mdfind = macOsBin "/usr/bin" "mdfind";
+    afplay = macOsBin "/usr/bin" "afplay";
+    say = macOsBin "/usr/bin" "say";
+
     # Better audio panel
     # soundsource = pkgs.soundsource;
   }

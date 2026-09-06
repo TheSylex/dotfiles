@@ -5,8 +5,10 @@
 inputs.nix-darwin.lib.darwinSystem {
   modules = [
     ({pkgs, ...}: {
+      nix.package = pkgs.lixPackageSets.stable.lix;
+
       nixpkgs.hostPlatform = "aarch64-darwin";
-      nix.settings.experimental-features = "nix-command flakes pipe-operators";
+      nix.settings.experimental-features = "nix-command flakes pipe-operator";
       nix.optimise.automatic = true;
 
       programs.fish.enable = true;

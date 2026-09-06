@@ -34,7 +34,7 @@
     haumea.inputs.nixpkgs.follows = "nixpkgs";
 
     # Add configuration for packages
-    wrapper-manager.url = "github:viperML/wrapper-manager";
+    wrapper-manager.url = "git+https://codeberg.org/viperML/wrapper-manager/";
 
     # Packages
     # asciinema-flake.url = "github:asciinema/asciinema?rev=14b374697144a68b0a6731250183ec004b2ce085";
